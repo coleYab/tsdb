@@ -8,11 +8,7 @@ memory, disk, and network stats from `/proc` and ships them to ChronoDB.
 
 ### Server
 
-```
-WAL → Memtable → Segment → Compaction → Retention
-      ↑            ↓
-      └── Index ───┘
-```
+![ChronoDB Server Storage Diagram](images/storage.png)
 
 - **Engine**: single goroutine event loop processes all commands sequentially
 - **WAL**: buffered write-ahead log with CRC32, configurable fsync, crash recovery
@@ -27,12 +23,7 @@ WAL → Memtable → Segment → Compaction → Retention
 
 ### Agent
 
-```
-System (/proc) ─┐
-StatsD (UDP)   ─┤── Batcher ── Shipper ──► ChronoDB /write
-Docker (socket)─┘
-File Tail      ─┘
-```
+![ChronoDB Agent Diagram](images/agent.png)
 
 - **System collector**: reads `/proc/stat`, `/proc/meminfo`, `/proc/diskstats`, `/proc/net/dev`
 - **StatsD listener**: receives UDP StatsD metrics on `:8125`

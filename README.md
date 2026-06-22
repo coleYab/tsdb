@@ -123,13 +123,3 @@ curl -s -X POST localhost:8080/query \
 | `run-agent` | Start chrono-agent |
 | `clean` | Remove build artifacts and data |
 
-## Testing
-
-```bash
-make test
-# or: go test -race -count=3 ./...
-```
-
-21 packages, 100+ tests covering write path, query engine, crash recovery,
-compaction, retention, HTTP API, agent collectors, shipper, batcher,
-and end-to-end integration.
